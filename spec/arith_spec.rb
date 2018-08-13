@@ -99,31 +99,17 @@ describe "adding words" do
         it "works over 90" do
             expect(@arith3.parse_words_to_int("ninety six")).to eq(96)
         end
-    end
-    
-    describe "convert sentence" do
-        it "works over twenty" do
-            expect(@arith3.convert_sentence("twenty five")).to eq(25)
-        end
-    
-        it "works over twenty" do
-            expect(@arith3.convert_sentence("twenty two")).to eq(22)
-        end
-    
-        it "works over twenty" do
-            expect(@arith3.convert_sentence("twenty nine")).to eq(29)
-        end
 
-        it "works over thirty" do
-            expect(@arith3.convert_sentence("thirty nine")).to eq(39)
+        it "works over 100" do
+            expect(@arith2.parse_words_to_int("one hundred")).to eq(100)
         end
 
         it "works over 100" do
-            expect(@arith3.convert_sentence("one hundred")).to eq(100)
+            expect(@arith2.parse_words_to_int("one hundred and thirty three")).to eq(133)
         end
 
         it "works over 100" do
-            expect(@arith3.convert_sentence("one hundred and thirty three")).to eq(133)
+            expect(@arith2.parse_words_to_int("two hundred and seventy")).to eq(270)
         end
     end
 

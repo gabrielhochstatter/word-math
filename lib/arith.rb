@@ -42,13 +42,18 @@ class Arith
     end
 
     def parse_words_to_int(string)
-        number_of_words = string.split(" ").length
-
-        if number_of_words > 1
-            convert_sentence(string)
-        else
-            @dictionary[string]
+        words = string.split(" ").delete_if{ |word| word == "and" }
+        if words.include?("hundred") && words.length <= 2
+            return @dictionary[words[0]] * 100
+        elsif words.include?("hundred")
+            hundreds = words[0]
+            number = @dictionary[hundreds] * 100
+            words.shift(2)
+            number += words.map{ |word| @dictionary[word] }.sum
+            return number
         end
+
+        words.map! { |word| @dictionary[word] }.sum
     end
 
     def parse_num_to_words(num)
@@ -68,18 +73,5 @@ class Arith
             tens + " " + @dictionary.key(num % 10)
         end
     end
-    
-    def convert_sentence(string)
-        words = string.split(" ").delete_if{ |word| word == "and" }
-        if words.include?("hundred") && words.length <= 2
-            return @dictionary[words[0]] * 100
-        elsif words.include?("hundred")
-            
-
-        end
-
-        words.map! { |word| @dictionary[word] }.sum
-    end
-    
 
 end
