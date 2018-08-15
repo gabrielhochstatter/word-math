@@ -1,39 +1,32 @@
 require "word_math"
 
-describe "adding words" do
+describe "WordMath unit tests" do
     before(:each) do
-        @word_math = WordMath.new
+        @converter = double(:converter)
+        allow(@converter).to receive(:convert_words_to_num)
+        allow(@converter).to receive(:convert_num_to_words)
+        @word_math = WordMath.new(@converter)
     end
 
     describe "#add" do
-        it "adds the number passed as a word (three + four = seven)" do
-            expect(@word_math.add("three", "four")).to eq("seven")
+        it "calls the correct conversion methods with correct arguments" do
+            allow(@converter).to receive(:convert_words_to_num) { 1 }
+            expect(@converter).to receive(:convert_words_to_num).with("one").exactly(2).times
+            @word_math.add("one", "one")
         end
 
-        it "adds the number passed as a word (two + six = eight)" do
-            expect(@word_math.add("two", "six")).to eq("eight")
+        it "calls the correct conversion methods with correct arguments" do
+            allow(@converter).to receive(:convert_words_to_num) { 1 }
+            expect(@converter).to receive(:convert_words_to_num).with("twelve").once
+            expect(@converter).to receive(:convert_words_to_num).with("ten").once
+            @word_math.add("twelve", "ten")
         end
 
-        it "adds to more than ten (3+9=12)" do
-            expect(@word_math.add("three", "nine")).to eq("twelve")
+        it "calls the correct conversion methods with correct arguments" do
+            allow(@converter).to receive(:convert_words_to_num) { 5 }
+            expect(@converter).to receive(:convert_num_to_words).with(10)
+            @word_math.add("five", "five")
         end
-
-        it "adds to more than twenty (15+9=24)" do
-            expect(@word_math.add("fifteen", "nine")).to eq("twenty four")
-        end
-
-        it "adds to more than fifty (27+40=67)" do
-            expect(@word_math.add("twenty seven", "forty")).to eq("sixty seven")
-        end
-
-        it "adds to more than one hundred (90+14=104)" do
-            expect(@word_math.add("ninety", "fourteen")).to eq("one hundred and four")
-        end
-
-        it "adds to more than two hundred (200+56=256)" do
-            expect(@word_math.add("two hundred", "fifty six")).to eq("two hundred and fifty six")
-        end
-
     end
 
-end
+end 
