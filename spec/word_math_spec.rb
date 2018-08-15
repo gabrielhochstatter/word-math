@@ -29,4 +29,25 @@ describe "WordMath unit tests" do
         end
     end
 
+    describe "#subtract" do
+        it "calls the correct conversion methods with correct arguments" do
+            allow(@converter).to receive(:convert_words_to_num) { 1 }
+            expect(@converter).to receive(:convert_words_to_num).with("one").exactly(2).times
+            @word_math.subtract("one", "one")
+        end
+
+        it "calls the correct conversion methods with correct arguments" do
+            allow(@converter).to receive(:convert_words_to_num) { 1 }
+            expect(@converter).to receive(:convert_words_to_num).with("twelve").once
+            expect(@converter).to receive(:convert_words_to_num).with("ten").once
+            @word_math.subtract("twelve", "ten")
+        end
+
+        it "calls the correct conversion methods with correct arguments" do
+            allow(@converter).to receive(:convert_words_to_num) { 5 }
+            expect(@converter).to receive(:convert_num_to_words).with(0)
+            @word_math.subtract("five", "five")
+        end
+    end
+
 end 
