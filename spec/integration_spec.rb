@@ -33,7 +33,16 @@ describe "adding words integration tests" do
         it "adds to more than two hundred (200+56=256)" do
             expect(@word_math.add("two hundred", "fifty six")).to eq("two hundred and fifty six")
         end
+    end
 
+    describe "#subtract" do
+        it "subtracts the second arg from first (10-2=8)" do
+            expect(@word_math.subtract("ten", "two")).to eq("eight")
+        end
+
+        it "works with larger numbers" do
+            expect(@word_math.subtract("one hundred and forty", "one hundred and ten")).to eq("thirty")
+        end
     end
 
 end

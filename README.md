@@ -19,7 +19,7 @@ w.add("one hundred and five", "two hundred and fifty four")
 
 ## TODO:
 
-- add support for subtraction, multiplication and division.
+- add support for multiplication and division.
 - add support for numbers past 999.
 - add support for negative numbers.
 - add some examples to this readme.
