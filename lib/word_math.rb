@@ -1,6 +1,5 @@
-class Arith
-    def initialize(number)
-        @number = number
+class WordMath
+    def initialize
         # THIS IS A LIST OF ALL NUMBERS WITH UNIQUE NAMES
         @dictionary = {
             "zero" => 0,
@@ -35,8 +34,8 @@ class Arith
         } 
     end
 
-    def add(num_to_add)
-        total_as_int = parse_words_to_num(@number) + parse_words_to_num(num_to_add)
+    def add(num_1, num_2)
+        total_as_int = parse_words_to_num(num_1) + parse_words_to_num(num_2)
 
         parse_num_to_words(total_as_int)
     end
