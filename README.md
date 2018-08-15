@@ -6,9 +6,19 @@ So passing "twenty" and "thirty seven" as arguments to the `add` method should r
 
 At the moment the highest supported number is 999 ("nine hundred and ninety nine") and everything that results in more than that throws an error.
 
+## Examples
+
+```ruby
+w = WordMath.new
+w.add("three", "seven")
+=> "ten"
+
+w.add("one hundred and five", "two hundred and fifty four")
+=> "three hundred and fifty nine"
+```
+
 ## TODO:
 
-- rename the main class from Arith to something that makes more sense.
 - add support for subtraction, multiplication and division.
 - add support for numbers past 999.
 - add support for negative numbers.
