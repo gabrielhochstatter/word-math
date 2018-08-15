@@ -11,10 +11,10 @@ At the moment the highest supported number is 999 ("nine hundred and ninety nine
 ```ruby
 w = WordMath.new
 w.add("three", "seven")
-=> "ten"
+#=> "ten"
 
 w.add("one hundred and five", "two hundred and fifty four")
-=> "three hundred and fifty nine"
+#=> "three hundred and fifty nine"
 ```
 
 ## TODO:
