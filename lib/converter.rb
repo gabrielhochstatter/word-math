@@ -1,8 +1,8 @@
-class Arith
-    def initialize(number)
-        @number = number
-        # THIS IS A LIST OF ALL NUMBERS WITH UNIQUE NAMES
-        @dictionary = {
+class Converter
+
+    def initialize
+        # Below is a list of all numbers with unique names
+        @number_names = {
             "zero" => 0,
             "one" => 1,
             "two" => 2,
@@ -35,42 +35,36 @@ class Arith
         } 
     end
 
-    def add(num_to_add)
-        total_as_int = parse_words_to_num(@number) + parse_words_to_num(num_to_add)
-
-        parse_num_to_words(total_as_int)
-    end
-
-    def parse_words_to_num(string)
+    def convert_words_to_num(string)
         words = string.split(" ").delete_if{ |word| word == "and" }
         if words.include?("hundred") && words.length <= 2
-            return @dictionary[words[0]] * 100
+            return @number_names[words[0]] * 100
         elsif words.include?("hundred")
             hundreds = words[0]
-            number = @dictionary[hundreds] * 100
+            number = @number_names[hundreds] * 100
             words.shift(2)
-            number += words.map{ |word| @dictionary[word] }.sum
+            number += words.map{ |word| @number_names[word] }.sum
             return number
         end
 
-        words.map! { |word| @dictionary[word] }.sum
+        words.map! { |word| @number_names[word] }.sum
     end
 
-    def parse_num_to_words(num)
-        hundreds = @dictionary.key(num/100)
-        tens = @dictionary.key((num / 10) * 10)
-        tens_over_100 = @dictionary.key(((num % 100) / 10) * 10)
+    def convert_num_to_words(num)
+        hundreds = @number_names.key(num/100)
+        tens = @number_names.key((num / 10) * 10)
+        tens_over_100 = @number_names.key(((num % 100) / 10) * 10)
         
         if num % 100 == 0
             hundreds + " hundred"
         elsif num > 100 && ((num % 100) <= 20 || (num % 100) % 10 == 0)
-            hundreds + " hundred and " + @dictionary.key(num % 100)
+            hundreds + " hundred and " + @number_names.key(num % 100)
         elsif num > 100
-            hundreds + " hundred and " + tens_over_100 + " " + @dictionary.key(num % 10)
+            hundreds + " hundred and " + tens_over_100 + " " + @number_names.key(num % 10)
         elsif num <= 20 || num % 10 == 0
-            @dictionary.key(num)
+            @number_names.key(num)
         else
-            tens + " " + @dictionary.key(num % 10)
+            tens + " " + @number_names.key(num % 10)
         end
     end
 
